@@ -1,23 +1,27 @@
 
 import pubsub from "./../pubsub";
-import { getBlockNumber } from './../pweb3';
+import { getBlockNumber , getBalance} from './../pweb3';
 
 
-setInterval(async () => {
+// setInterval(async () => {
 
-    const bn = await getBlockNumber();
+//     const bn = await getBlockNumber();
 
-    pubsub.publish("blockNumberChanged", {
-        blockNumberChanged: bn
-    });
+//     pubsub.publish("blockNumberChanged", {
+//         blockNumberChanged: bn
+//     });
 
-}, 2000);
+// }, 2000);
 
 export const resolvers = {
 
     Query: {
         getBlockNumber: () => {
             return getBlockNumber();
+        }, 
+        getBalance:(parent, args, context, info )=>{     
+                   
+            return getBalance(args.address) ; 
         }
     },
 
