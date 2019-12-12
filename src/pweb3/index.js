@@ -6,3 +6,6 @@ export function getBlockNumber(){
     
     return  web3.pi.getBlockNumber() ;
 }
+function getBalance(address){
+    return web3.pi.getBalance(address)
+}
