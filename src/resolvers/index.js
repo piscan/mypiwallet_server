@@ -1,6 +1,6 @@
 
 import pubsub from "./../pubsub";
-import { getBlockNumber , getBalance} from './../pweb3';
+import { getBlockNumber , getBalance , sendRawTransaction} from './../pweb3';
 
 
 // setInterval(async () => {
@@ -20,8 +20,11 @@ export const resolvers = {
             return getBlockNumber();
         }, 
         getBalance:(parent, args, context, info )=>{     
-                   
+
             return getBalance(args.address) ; 
+        }, 
+        sendRawTransaction:(parent , args , context , info )=>{
+            return sendRawTransaction(args.signedTransaction);
         }
     },
 
