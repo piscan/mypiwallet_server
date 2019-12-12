@@ -6,10 +6,11 @@ export function getBlockNumber(){
     
     return  web3.pi.getBlockNumber() ;
 }
-function getBalance(address){
+export function getBalance(address){
+
     return web3.pi.getBalance(address)
 }
-function sendRawTransaction(signedTransaction){
+export function sendRawTransaction(signedTransaction){
 
     return web3.pi.sendRawTransaction(signedTransaction);
 }
