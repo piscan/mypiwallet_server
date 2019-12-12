@@ -1,27 +1,38 @@
 
- import pubsub from "./../pubsub";
-import {getBlockNumber} from './../pweb3'; 
+import pubsub from "./../pubsub";
+import { getBlockNumber } from './../pweb3';
 
-setInterval(async ()=>{
 
-    const bn  = await getBlockNumber(); 
-    
+setInterval(async () => {
+
+    const bn = await getBlockNumber();
+
     pubsub.publish("blockNumberChanged", {
-        blockNumberChanged: bn 
-      });
+        blockNumberChanged: bn
+    });
 
-} , 3000 ) 
-export const resolvers ={
+}, 2000);
 
-    Query:{
-        getBlockNumber :() =>{
-            return getBlockNumber(); 
+export const resolvers = {
+
+    Query: {
+        getBlockNumber: () => {
+            return getBlockNumber();
         }
-    }, 
+    },
 
     Subscription: {
         blockNumberChanged: {
-          subscribe: () => pubsub.asyncIterator(["blockNumberChanged"])
+            subscribe: () => {
+                try {
+
+                    return pubsub.asyncIterator(["blockNumberChanged"])
+
+                }catch(error){
+                    throw new Error(error) ; 
+                }
+               
+            }
         }
-      }
+    }
 }
